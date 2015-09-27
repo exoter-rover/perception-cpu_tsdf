@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(cpu_tsdf)
 # Find modules
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
-set(CMAKE_BUILD_TYPE Release CACHE STRING "Release" FORCE)
+set(CMAKE_BUILD_TYPE Debug CACHE STRING "Debug" FORCE)
 
 # Use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH  FALSE)
@@ -82,5 +82,20 @@ ENDFOREACH(HEADER)
 # Install CPUTSDF cmake config file for FIND_PACKAGE()
 configure_file (${PROJECT_SOURCE_DIR}/CPUTSDFConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/CPUTSDFConfig.cmake @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/CPUTSDFConfig.cmake DESTINATION share/cpu_tsdf)
+
+set(DEPS_PKGCONFIG "${DEPS_PKGCONFIG} cpu_tsdf")
+set(PKGCONFIG_REQUIRES ${cpu_tsdf_PKGCONFIG_REQUIRES})
+set(PKGCONFIG_CFLAGS ${cpu_tsdf_PKGCONFIG_CFLAGS})
+set(PKGCONFIG_LIBS ${cpu_tsdf_PKGCONFIG_LIBS})
+
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cpu_tsdf.pc.in)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cpu_tsdf.pc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/cpu_tsdf.pc @ONLY)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cpu_tsdf.pc
+    DESTINATION lib/pkgconfig)
+else()
+    message("pkg-config: ${CMAKE_CURRENT_SOURCE_DIR}/cpu_tsdf.pc.in is not available for configuration")
+endif()
+
 
 
