@@ -4,6 +4,7 @@
     </description>
     <author>Stephen Miller</author>
     <depend package="base/cmake" />
+    <depend package="slam/pcl" />
 
     <tags>stable</tags>
 </package>
