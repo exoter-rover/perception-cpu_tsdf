@@ -24,6 +24,9 @@ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 find_package(PCL 1.7 QUIET REQUIRED)
+if(NOT "${PCL_LIBRARIES}" STREQUAL "")
+    list(REMOVE_ITEM PCL_LIBRARIES "vtkproj4")
+endif()
 
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})

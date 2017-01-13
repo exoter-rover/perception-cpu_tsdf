@@ -3,8 +3,12 @@
     CPU TSDF
     </description>
     <author>Stephen Miller</author>
+    <url>https://github.com/sdmiller/cpu_tsdf</url>
     <depend package="base/cmake" />
     <depend package="slam/pcl" />
+
+    <!-- libproj-dev needed due to error in vtk6 for Ubuntu 16.04-->
+    <rosdep name="proj" />
 
     <tags>stable</tags>
 </package>
